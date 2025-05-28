@@ -19,7 +19,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
@@ -67,6 +66,12 @@ fun MainFunForClick(
     var scope = rememberCoroutineScope()
 
     val consumeEnabled by purchaseHelper.consumeEnabled.collectAsState(false)
+    var enabledForUpgrade by remember { mutableStateOf(true) }
+    if (userSpeedValue.value != 1000){
+        enabledForUpgrade = true
+    } else {
+        enabledForUpgrade = false
+    }
 
     Box(modifier = modifier){
 
@@ -100,15 +105,10 @@ fun MainFunForClick(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = modifier
                         .fillMaxSize()
-                        .background(color = MaterialTheme.colorScheme.onBackground)
+                        .background(color = MaterialTheme.colorScheme.background)
                     ) {
                     Button(
-                        colors = ButtonColors(
-                            contentColor = MaterialTheme.colorScheme.background,
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            disabledContentColor = Color.Gray,
-                            disabledContainerColor = Color.Black
-                        ),
+                        enabled = enabledForUpgrade,
                         onClick = { enabledDialogPurchase.value = true }) {
                         Text(stringResource(R.string.upgrade)) }
                     }
@@ -124,7 +124,7 @@ fun MainFunForClick(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = modifier
                             .fillMaxSize()
-                            .background(color = MaterialTheme.colorScheme.onBackground)
+                            .background(color = MaterialTheme.colorScheme.background)
                     ) {
                         Button(
                             onClick = {enabledDialog.value = !enabledDialog.value}
@@ -139,7 +139,7 @@ fun MainFunForClick(
                     .fillMaxSize()
                     .padding(bottom = 64.dp, top = 180.dp)
             ) {
-                Text(userSpeedValue.value.toString(), color = Color.White)
+                Text("speed: ${userSpeedValue.value}", color = Color.White)
                 Text(
                     userCoinValue.value.toString(),
                     fontSize = 36.sp,
@@ -344,7 +344,9 @@ fun DialogForPurchaseApp(
                     Row (
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceAround,
-                        modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp)
                     ) {
                         IconButton(
                             onClick = {
@@ -386,7 +388,7 @@ fun DialogSettingApp(
     dataStoreManager: DataStoreManager
 ){
 
-    var courseScoreFromRealCoin by remember { mutableIntStateOf(1000000) }
+    var courseScoreFromRealCoin by remember { mutableIntStateOf(100000) }
     var courseCoinFromMoney by remember { mutableFloatStateOf(0.003423f) }
     var textFieldValue by remember { mutableStateOf("0") }
 
