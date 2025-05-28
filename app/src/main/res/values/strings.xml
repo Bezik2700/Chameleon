@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Click App</string>
+    
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="coins">Coins</string>
+    <string name="chameleon">Chameleon</string>
+    <string name="not_coins">You not have enough coins</string>
+    <string name="purchase_info">Do you really want to purchase a pack of +10 speed coins for 0.19 USD?</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="purchase_completed">Purchase completed</string>
+    <string name="close">close</string>
+    <string name="settings">settings</string>
+    <string name="upgrade">upgrade</string>
+    <string name="change">change</string>
+    <string name="purchase_in_progress">The purchase is being processed</string>
+    
+</resources>
